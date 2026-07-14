@@ -1,4 +1,21 @@
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
+
+const chiSiamoSlides = [
+  '/images/DSCF3326.jpg',
+  '/images/_DSF0838.jpg',
+  '/images/DSCF3362.JPG',
+  '/images/DSCF6234.jpg',
+  '/images/PHOTO-2026-02-21-14-02-05.jpg'
+]
+
+const passeggiSlides = [
+  '/images/DSCF4169.JPG',
+  '/images/DSCF4195.JPG',
+  '/images/DSCF4126.JPG',
+  '/images/DSCF4176.JPG',
+  '/images/DSCF4191.JPG'
+]
 
 const navItems = [
   { label: 'Chi siamo', href: '#chi-siamo' },
@@ -20,6 +37,46 @@ const galleryItems = [
 const collaborators = ['Comune di Fano', 'ForBici FIAB Fano', 'Associazione Fanocuore ONLUS']
 
 function App() {
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [activePasseggi, setActivePasseggi] = useState(0)
+  const [showCollaboraBar, setShowCollaboraBar] = useState(false)
+  const heroRef = useRef(null)
+  const collaboraRef = useRef(null)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActiveSlide((i) => (i + 1) % chiSiamoSlides.length)
+    }, 5000)
+    return () => clearInterval(id)
+  }, [])
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActivePasseggi((i) => (i + 1) % passeggiSlides.length)
+    }, 5000)
+    return () => clearInterval(id)
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const hero = heroRef.current
+      const collabora = collaboraRef.current
+      if (!hero || !collabora) return
+      const heroBottom = hero.getBoundingClientRect().bottom
+      const collaboraTop = collabora.getBoundingClientRect().top
+      const pastHero = heroBottom < 80
+      const reachedCollabora = collaboraTop < window.innerHeight * 0.5
+      setShowCollaboraBar(pastHero && !reachedCollabora)
+    }
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
+  }, [])
+
   return (
     <div className="page-shell">
       <nav className="navbar">
@@ -37,28 +94,41 @@ function App() {
         </div>
       </nav>
 
-      <header className="hero" id="home">
+      <a
+        className={`collabora-bar${showCollaboraBar ? ' is-visible' : ''}`}
+        href="#collabora"
+      >
+        <span className="collabora-bar-text">Sei un&apos;associazione? Collaboriamo!</span>
+        <span className="collabora-bar-cta">Scrivici</span>
+      </a>
+
+      <header className="hero" id="home" ref={heroRef}>
         <div className="hero-content">
-          <img src="/logo/logo-anico.png" alt="Logo Anicò" className="hero-logo" />
-          <p className="hero-badge">ODV · Fano</p>
           <h1>
-            Ti chiediamo un pezzetto del tuo tempo. In cambio, la promessa che lo passerai bene.
+            Un pezzetto del tuo tempo. La promessa di passarlo bene.
           </h1>
           <p className="hero-subtitle">
             Associazione di volontariato a Fano. Ci prendiamo cura degli spazi comuni e creiamo momenti di aggregazione autentici.
           </p>
-          <a className="primary-link" href="#chi-siamo">
-            Scopri chi siamo
-          </a>
         </div>
       </header>
 
       <main>
         <section className="section chi-siamo" id="chi-siamo">
-          <div className="section-inner split">
-            <div className="split-text">
+          <div className="chi-siamo-hero">
+            <div className="chi-siamo-media" aria-label="Foto di Anicò">
+              {chiSiamoSlides.map((src, index) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`Anicò ${index + 1}`}
+                  className={index === activeSlide ? 'is-active' : ''}
+                />
+              ))}
+            </div>
+            <div className="chi-siamo-copy">
               <p className="section-label">Chi siamo</p>
-              <h2>Nata per caso, cresciuta per scelta.</h2>
+              <h2>Un&apos;idea semplice, diventata un&apos;associazione.</h2>
               <p className="lead">
                 Anicò nasce dalla volontà di creare momenti di aggregazione per ragazze e ragazzi di Fano.
               </p>
@@ -66,29 +136,22 @@ function App() {
                 Stiamo insieme facendo cose, cose completamente diverse tra loro, a volte un po&apos; bizzarre, ma sempre in modo genuino. Ci piace prenderci cura degli spazi comuni, in particolare dei Passeggi. Ci piace la vita all&apos;aria aperta e stare insieme.
               </p>
             </div>
-            <div className="panel-card" aria-label="Il nome Anicò">
-              <img src="/images/DSCF3326.jpg" alt="Anicò in un momento di condivisione" />
-            </div>
-          </div>
-        </section>
-
-        <section className="gallery-strip" aria-label="Gallery">
-          <div className="gallery-scroll">
-            {galleryItems.map((item) => (
-              <div className="gallery-item" key={item.label}>
-                <img src={item.src} alt={item.label} />
-                <span>{item.label}</span>
-              </div>
-            ))}
           </div>
         </section>
 
         <section className="section passeggi" id="passeggi">
-          <div className="section-inner split reverse">
-            <div className="panel-card large" aria-label="Passeggi">
-              <img src="/images/DSCF3362.JPG" alt="I Passeggi a Fano" />
+          <div className="passeggi-hero">
+            <div className="passeggi-media" aria-label="I Passeggi a Fano">
+              {passeggiSlides.map((src, index) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`I Passeggi ${index + 1}`}
+                  className={index === activePasseggi ? 'is-active' : ''}
+                />
+              ))}
             </div>
-            <div className="split-text">
+            <div className="passeggi-copy">
               <p className="section-label">I Passeggi</p>
               <h2>Un pezzo di storia della nostra città.</h2>
               <p>
@@ -102,34 +165,31 @@ function App() {
         </section>
 
         <section className="section unisciti" id="unisciti">
-          <div className="section-inner split">
-            <div className="split-text">
-              <p className="section-label">Unisciti a noi</p>
-              <h2>Se ti va, vieni a trovarci.</h2>
-              <p>
-                Non serve nessun requisito particolare. Basta la voglia di dedicare un po&apos; del proprio tempo a stare insieme e prendersi cura di quello che ci sta intorno.
-              </p>
-            </div>
-            <div className="join-card">
-              <p className="card-title">Diventa un Anicò</p>
-              <div className="card-price">€10</div>
-              <p className="card-price-label">quota associativa annuale</p>
-              <p className="card-detail">
-                L&apos;anno sociale va fino al 31 agosto. A settembre si rinnova la tessera.
-              </p>
-              <div className="card-actions">
-                <a className="join-btn primary" href="https://forms.gle/XBZu9ayZ7vqH83a48" target="_blank" rel="noreferrer">
-                  Compila il modulo di iscrizione
-                </a>
-                <a className="join-btn secondary" href="https://paypal.me/virginiagiraldi" target="_blank" rel="noreferrer">
-                  Paga la quota con PayPal
-                </a>
-              </div>
+          <div className="unisciti-media" aria-hidden="true">
+            <img src="/images/DSCF3369.JPG" alt="" />
+          </div>
+          <div className="unisciti-card">
+            <h2>Unisciti a noi, se ti va.</h2>
+            <p>
+              Non serve nessun requisito particolare. Basta la voglia di dedicare un po&apos; del proprio tempo a stare insieme e prendersi cura di quello che ci sta intorno.
+            </p>
+            <div className="card-price">€10</div>
+            <p className="card-price-label">quota associativa annuale</p>
+            <p className="card-detail">
+              L&apos;anno sociale va fino al 31 agosto. A settembre si rinnova la tessera.
+            </p>
+            <div className="card-actions">
+              <a className="join-btn primary" href="https://forms.gle/XBZu9ayZ7vqH83a48" target="_blank" rel="noreferrer">
+                Compila il modulo di iscrizione
+              </a>
+              <a className="join-btn secondary" href="https://paypal.me/virginiagiraldi" target="_blank" rel="noreferrer">
+                Paga la quota con PayPal
+              </a>
             </div>
           </div>
         </section>
 
-        <section className="section collaborazioni" id="collabora">
+        <section className="section collaborazioni" id="collabora" ref={collaboraRef}>
           <div className="section-inner text-centered">
             <p className="section-label">Collaborazioni</p>
             <h2>Sei un&apos;associazione? Collaboriamo!</h2>
