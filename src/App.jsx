@@ -34,7 +34,13 @@ const galleryItems = [
   { label: 'Insieme', src: '/images/DSCF3347.jpg' }
 ]
 
-const collaborators = ['Comune di Fano', 'ForBici FIAB Fano', 'Associazione Fanocuore ONLUS']
+const collaborators = [
+  { name: 'Comune di Fano', logo: '/logo/partner/Comune.webp' },
+  { name: 'ForBici FIAB Fano', logo: '/logo/partner/forbici.png' },
+  { name: 'Associazione Fanocuore ONLUS', logo: '/logo/partner/Fanocuore.png' },
+  { name: 'APG', logo: '/logo/partner/APG.png' },
+  { name: 'Fondazione', logo: '/logo/partner/fondazione.png' }
+]
 
 function App() {
   const [activeSlide, setActiveSlide] = useState(0)
@@ -104,6 +110,11 @@ function App() {
 
       <header className="hero" id="home" ref={heroRef}>
         <div className="hero-content">
+          <img
+            src="/logo/scritta-anico-b.png"
+            alt="Anicò"
+            className="hero-wordmark"
+          />
           <h1>
             Un pezzetto del tuo tempo. La promessa di passarlo bene.
           </h1>
@@ -207,8 +218,8 @@ function App() {
             <div className="logo-marquee">
               <div className="logo-track">
                 {collaborators.concat(collaborators).map((partner, index) => (
-                  <span className="logo-pill" key={`${partner}-${index}`}>
-                    {partner}
+                  <span className="logo-pill" key={`${partner.name}-${index}`}>
+                    <img src={partner.logo} alt={partner.name} />
                   </span>
                 ))}
               </div>
