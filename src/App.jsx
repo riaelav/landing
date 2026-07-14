@@ -9,12 +9,12 @@ const navItems = [
 ]
 
 const galleryItems = [
-  'Foto gallery 1',
-  'Foto gallery 2',
-  'Foto gallery 3',
-  'Foto gallery 4',
-  'Foto gallery 5',
-  'Foto gallery 6'
+  { label: 'Passeggi', src: '/images/DSCF4125.JPG' },
+  { label: 'Volontariato', src: '/images/DSCF4162.JPG' },
+  { label: 'Spazi comuni', src: '/images/DSCF4191.JPG' },
+  { label: 'Attività', src: '/images/DSCF4202.JPG' },
+  { label: 'Fano', src: '/images/PHOTO-2026-02-21-14-02-05.jpg' },
+  { label: 'Insieme', src: '/images/DSCF3347.jpg' }
 ]
 
 const collaborators = ['Comune di Fano', 'ForBici FIAB Fano', 'Associazione Fanocuore ONLUS']
@@ -24,10 +24,9 @@ function App() {
     <div className="page-shell">
       <nav className="navbar">
         <div className="navbar-inner">
-          <div className="navbar-brand" aria-label="Anicò">
-            <span className="brand-mark">A</span>
-            <span className="brand-text">anicò</span>
-          </div>
+          <a className="navbar-brand" href="#home" aria-label="Anicò">
+            <img src="/logo/logo-anico.png" alt="Logo Anicò" className="brand-logo" />
+          </a>
           <ul className="navbar-links">
             {navItems.map((item) => (
               <li key={item.href}>
@@ -40,6 +39,7 @@ function App() {
 
       <header className="hero" id="home">
         <div className="hero-content">
+          <img src="/logo/logo-anico.png" alt="Logo Anicò" className="hero-logo" />
           <p className="hero-badge">ODV · Fano</p>
           <h1>
             Ti chiediamo un pezzetto del tuo tempo. In cambio, la promessa che lo passerai bene.
@@ -66,15 +66,18 @@ function App() {
                 Stiamo insieme facendo cose, cose completamente diverse tra loro, a volte un po&apos; bizzarre, ma sempre in modo genuino. Ci piace prenderci cura degli spazi comuni, in particolare dei Passeggi. Ci piace la vita all&apos;aria aperta e stare insieme.
               </p>
             </div>
-            <div className="panel-card" aria-label="Il nome Anicò" />
+            <div className="panel-card" aria-label="Il nome Anicò">
+              <img src="/images/DSCF3326.jpg" alt="Anicò in un momento di condivisione" />
+            </div>
           </div>
         </section>
 
         <section className="gallery-strip" aria-label="Gallery">
           <div className="gallery-scroll">
             {galleryItems.map((item) => (
-              <div className="gallery-item" key={item}>
-                {item}
+              <div className="gallery-item" key={item.label}>
+                <img src={item.src} alt={item.label} />
+                <span>{item.label}</span>
               </div>
             ))}
           </div>
@@ -82,7 +85,9 @@ function App() {
 
         <section className="section passeggi" id="passeggi">
           <div className="section-inner split reverse">
-            <div className="panel-card large" aria-label="Passeggi" />
+            <div className="panel-card large" aria-label="Passeggi">
+              <img src="/images/DSCF3362.JPG" alt="I Passeggi a Fano" />
+            </div>
             <div className="split-text">
               <p className="section-label">I Passeggi</p>
               <h2>Un pezzo di storia della nostra città.</h2>
@@ -161,7 +166,7 @@ function App() {
             </p>
           </div>
           <div className="footer-col footer-logo-wrap">
-            <div className="footer-logo">anicò</div>
+            <img src="/logo/logo-anico.png" alt="Logo Anicò" className="footer-logo" />
           </div>
           <div className="footer-col social-col">
             <h4>Seguici</h4>
