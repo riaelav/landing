@@ -1,264 +1,185 @@
-import { useState } from 'react'
 import './App.css'
 
+const navItems = [
+  { label: 'Chi siamo', href: '#chi-siamo' },
+  { label: 'I Passeggi', href: '#passeggi' },
+  { label: 'Unisciti', href: '#unisciti' },
+  { label: 'Collabora', href: '#collabora' },
+  { label: 'Contatti', href: '#contatti' }
+]
+
+const galleryItems = [
+  'Foto gallery 1',
+  'Foto gallery 2',
+  'Foto gallery 3',
+  'Foto gallery 4',
+  'Foto gallery 5',
+  'Foto gallery 6'
+]
+
+const collaborators = ['Comune di Fano', 'ForBici FIAB Fano', 'Associazione Fanocuore ONLUS']
+
 function App() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('Form submitted:', formData)
-    setFormData({ name: '', email: '', message: '' })
-    alert('Grazie per il vostro messaggio!')
-  }
-
   return (
-    <>
-      {/* Navigation */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div className="container-fluid">
-          <a className="navbar-brand fw-bold" href="#home">
-            Landing
-          </a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="#hero">Home</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#features">Funzionalità</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#testimonials">Testimonianze</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#contact">Contatti</a>
-              </li>
-            </ul>
+    <div className="page-shell">
+      <nav className="navbar">
+        <div className="navbar-inner">
+          <div className="navbar-brand" aria-label="Anicò">
+            <span className="brand-mark">A</span>
+            <span className="brand-text">anicò</span>
           </div>
+          <ul className="navbar-links">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="hero" className="hero-section py-5 bg-gradient text-white">
-        <div className="container py-5">
-          <div className="row align-items-center">
-            <div className="col-lg-6 mb-4 mb-lg-0">
-              <h1 className="display-4 fw-bold mb-4">anicò</h1>
-              <p className="lead mb-4">Crea esperienze straordinarie con tecnologie moderne e design innovativo.</p>
-              <a href="#contact" className="btn btn-light btn-lg">Inizia Adesso</a>
+      <header className="hero" id="home">
+        <div className="hero-content">
+          <p className="hero-badge">ODV · Fano</p>
+          <h1>
+            Ti chiediamo un pezzetto del tuo tempo. In cambio, la promessa che lo passerai bene.
+          </h1>
+          <p className="hero-subtitle">
+            Associazione di volontariato a Fano. Ci prendiamo cura degli spazi comuni e creiamo momenti di aggregazione autentici.
+          </p>
+          <a className="primary-link" href="#chi-siamo">
+            Scopri chi siamo
+          </a>
+        </div>
+      </header>
+
+      <main>
+        <section className="section chi-siamo" id="chi-siamo">
+          <div className="section-inner split">
+            <div className="split-text">
+              <p className="section-label">Chi siamo</p>
+              <h2>Nata per caso, cresciuta per scelta.</h2>
+              <p className="lead">
+                Anicò nasce dalla volontà di creare momenti di aggregazione per ragazze e ragazzi di Fano.
+              </p>
+              <p>
+                Stiamo insieme facendo cose, cose completamente diverse tra loro, a volte un po&apos; bizzarre, ma sempre in modo genuino. Ci piace prenderci cura degli spazi comuni, in particolare dei Passeggi. Ci piace la vita all&apos;aria aperta e stare insieme.
+              </p>
             </div>
-            <div className="col-lg-6">
-              <div className="hero-image bg-white rounded-lg p-4" style={{ height: '300px' }}>
-                <div className="d-flex align-items-center justify-content-center h-100 bg-light rounded">
-                  <p className="text-secondary">Immagine Hero</p>
-                </div>
+            <div className="panel-card" aria-label="Il nome Anicò" />
+          </div>
+        </section>
+
+        <section className="gallery-strip" aria-label="Gallery">
+          <div className="gallery-scroll">
+            {galleryItems.map((item) => (
+              <div className="gallery-item" key={item}>
+                {item}
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="section passeggi" id="passeggi">
+          <div className="section-inner split reverse">
+            <div className="panel-card large" aria-label="Passeggi" />
+            <div className="split-text">
+              <p className="section-label">I Passeggi</p>
+              <h2>Un pezzo di storia della nostra città.</h2>
+              <p>
+                I Passeggi sono un pezzo di storia di Fano. Esistono dal 1783: lecci, tigli, ippocastani, un polmone verde nel cuore della città.
+              </p>
+              <p>
+                Abbiamo deciso di prendercene cura. Dal 2025 abbiamo un accordo con il Comune per rendere i Passeggi un posto più bello e accogliente: non solo un viale di passaggio, ma un luogo in cui fermarsi e stare bene. Ci occupiamo della manutenzione, organizziamo eventi, facciamo in modo che i Passeggi siano vissuti, non solo attraversati. Uno spazio vissuto è uno spazio che si protegge da solo.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="section unisciti" id="unisciti">
+          <div className="section-inner split">
+            <div className="split-text">
+              <p className="section-label">Unisciti a noi</p>
+              <h2>Se ti va, vieni a trovarci.</h2>
+              <p>
+                Non serve nessun requisito particolare. Basta la voglia di dedicare un po&apos; del proprio tempo a stare insieme e prendersi cura di quello che ci sta intorno.
+              </p>
+            </div>
+            <div className="join-card">
+              <p className="card-title">Diventa un Anicò</p>
+              <div className="card-price">€10</div>
+              <p className="card-price-label">quota associativa annuale</p>
+              <p className="card-detail">
+                L&apos;anno sociale va fino al 31 agosto. A settembre si rinnova la tessera.
+              </p>
+              <div className="card-actions">
+                <a className="join-btn primary" href="https://forms.gle/XBZu9ayZ7vqH83a48" target="_blank" rel="noreferrer">
+                  Compila il modulo di iscrizione
+                </a>
+                <a className="join-btn secondary" href="https://paypal.me/virginiagiraldi" target="_blank" rel="noreferrer">
+                  Paga la quota con PayPal
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section collaborazioni" id="collabora">
+          <div className="section-inner text-centered">
+            <p className="section-label">Collaborazioni</p>
+            <h2>Sei un&apos;associazione? Collaboriamo!</h2>
+            <p>
+              Il territorio cresce quando le idee si incontrano. Cerchiamo sempre nuove sinergie per arricchire il tessuto sociale di chi ci vive intorno. Riconosciamo il ruolo delle associazioni, degli enti e in generale del volontariato, e per questo vogliamo creare ponti.
+            </p>
+            <p>
+              Siamo pront* a sostenere, co-progettare e condividere percorsi con chi, come noi, ha a cuore il bene comune. Scrivici!
+            </p>
+            <a className="collabora-cta" href="mailto:anico.odv@gmail.com?subject=Proposta%20di%20collaborazione">
+              Scrivici una mail
+            </a>
+
+            <p className="marquee-label">Hanno già collaborato con noi</p>
+            <div className="logo-marquee">
+              <div className="logo-track">
+                {collaborators.concat(collaborators).map((partner, index) => (
+                  <span className="logo-pill" key={`${partner}-${index}`}>
+                    {partner}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="footer" id="contatti">
+        <div className="footer-inner">
+          <div className="footer-col">
+            <h4>Scrivici</h4>
+            <p>
+              <a href="mailto:anico.odv@gmail.com">anico.odv@gmail.com</a>
+            </p>
+          </div>
+          <div className="footer-col footer-logo-wrap">
+            <div className="footer-logo">anicò</div>
+          </div>
+          <div className="footer-col social-col">
+            <h4>Seguici</h4>
+            <div className="footer-social">
+              <a href="https://www.instagram.com/anico.odv/" target="_blank" rel="noreferrer" aria-label="Instagram">
+                Instagram
+              </a>
+              <a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+                Facebook
+              </a>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="features-section py-5 bg-light">
-        <div className="container">
-          <div className="text-center mb-5">
-            <h2 className="display-5 fw-bold">Funzionalità</h2>
-            <p className="lead text-muted">Scopri cosa possiamo offrirti</p>
-          </div>
-          <div className="row g-4">
-            <div className="col-md-4">
-              <div className="card h-100 border-0 shadow-sm">
-                <div className="card-body text-center">
-                  <div className="feature-icon mb-3" style={{
-                    width: '60px',
-                    height: '60px',
-                    margin: '0 auto',
-                    backgroundColor: '#007bff',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: '24px'
-                  }}>⚡</div>
-                  <h5 className="card-title">Velocità</h5>
-                  <p className="card-text text-muted">Prestazioni ottimali e velocità di caricamento massima per il tuo sito.</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card h-100 border-0 shadow-sm">
-                <div className="card-body text-center">
-                  <div className="feature-icon mb-3" style={{
-                    width: '60px',
-                    height: '60px',
-                    margin: '0 auto',
-                    backgroundColor: '#28a745',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: '24px'
-                  }}>🎨</div>
-                  <h5 className="card-title">Design</h5>
-                  <p className="card-text text-muted">Design responsive e moderno che si adatta a tutti i dispositivi.</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card h-100 border-0 shadow-sm">
-                <div className="card-body text-center">
-                  <div className="feature-icon mb-3" style={{
-                    width: '60px',
-                    height: '60px',
-                    margin: '0 auto',
-                    backgroundColor: '#ffc107',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: '24px'
-                  }}>🔒</div>
-                  <h5 className="card-title">Sicurezza</h5>
-                  <p className="card-text text-muted">Proteggiamo i tuoi dati con i più alti standard di sicurezza.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section id="testimonials" className="testimonials-section py-5">
-        <div className="container">
-          <div className="text-center mb-5">
-            <h2 className="display-5 fw-bold">Testimonianze</h2>
-            <p className="lead text-muted">Cosa dicono i nostri clienti</p>
-          </div>
-          <div className="row g-4">
-            <div className="col-md-4">
-              <div className="card border-0 shadow-sm">
-                <div className="card-body">
-                  <div className="mb-3">⭐⭐⭐⭐⭐</div>
-                  <p className="card-text">"Eccellente servizio! Ha superato tutte le mie aspettative e il team è stato molto disponibile."</p>
-                  <p className="fw-bold mb-0">- Marco Rossi</p>
-                  <p className="text-muted small">CEO, Tech Company</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card border-0 shadow-sm">
-                <div className="card-body">
-                  <div className="mb-3">⭐⭐⭐⭐⭐</div>
-                  <p className="card-text">"Professionalità e dedizione. Hanno reso il nostro progetto un successo straordinario."</p>
-                  <p className="fw-bold mb-0">- Giulia Bianchi</p>
-                  <p className="text-muted small">Direttore Marketing</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card border-0 shadow-sm">
-                <div className="card-body">
-                  <div className="mb-3">⭐⭐⭐⭐⭐</div>
-                  <p className="card-text">"La soluzione perfetta per le nostre esigenze. Altamente consigliato!"</p>
-                  <p className="fw-bold mb-0">- Luca Verdi</p>
-                  <p className="text-muted small">Founder, StartUp</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="contact-section py-5 bg-light">
-        <div className="container">
-          <div className="text-center mb-5">
-            <h2 className="display-5 fw-bold">Contattaci</h2>
-            <p className="lead text-muted">Siamo qui per aiutarti</p>
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-lg-6">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="name" className="form-label">Nome</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="Il tuo nome"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="La tua email"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="message" className="form-label">Messaggio</label>
-                  <textarea
-                    className="form-control"
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows="5"
-                    placeholder="Il tuo messaggio"
-                  ></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary btn-lg w-100">Invia Messaggio</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-dark text-white py-4 mt-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
-              <p>&copy; 2024 Landing Page. Tutti i diritti riservati.</p>
-            </div>
-            <div className="col-md-6 text-center text-md-end">
-              <a href="#" className="text-white text-decoration-none me-3">Privacy</a>
-              <a href="#" className="text-white text-decoration-none me-3">Termini</a>
-              <a href="#" className="text-white text-decoration-none">Contatti</a>
-            </div>
-          </div>
+        <div className="footer-bottom">
+          <p>Anicò ODV — Organizzazione di Volontariato · Fano (PU)</p>
         </div>
       </footer>
-    </>
+    </div>
   )
 }
 
