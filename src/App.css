@@ -98,7 +98,7 @@ a {
   padding: 4rem 1.5rem 3rem;
   background:
     linear-gradient(90deg, rgba(8, 12, 16, 0.55) 0%, rgba(8, 12, 16, 0.35) 100%),
-    url('/images/DSCF4202.JPG') center/cover;
+    url('/images/10.jpeg') center/cover;
 }
 
 .hero-content {
@@ -475,7 +475,7 @@ a {
   color: var(--white);
   background:
     linear-gradient(rgba(8, 12, 16, 0.3), rgba(8, 12, 16, 0.3)),
-    url('/images/_DSF0413.jpg') center 20%/cover no-repeat;
+    url('/images/_DSF0413.jpg') center bottom/cover no-repeat;
 }
 
 .collaborazioni .section-inner {
@@ -499,6 +499,25 @@ a {
 .collaborazioni p {
   max-width: 720px;
   margin: 0 auto 1rem;
+}
+
+.collabora-card {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(42, 42, 42, 0.14);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.collabora-card h2 {
+  color: var(--near-black);
+  text-shadow: none;
+}
+
+.collabora-card p {
+  color: rgba(42, 42, 42, 0.9);
 }
 
 .collabora-cta {

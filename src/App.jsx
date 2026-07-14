@@ -202,14 +202,16 @@ function App() {
 
         <section className="section collaborazioni" id="collabora" ref={collaboraRef}>
           <div className="section-inner text-centered">
-            <p className="section-label">Collaborazioni</p>
-            <h2>Sei un&apos;associazione? Collaboriamo!</h2>
-            <p>
-              Il territorio cresce quando le idee si incontrano. Cerchiamo sempre nuove sinergie per arricchire il tessuto sociale di chi ci vive intorno. Riconosciamo il ruolo delle associazioni, degli enti e in generale del volontariato, e per questo vogliamo creare ponti.
-            </p>
-            <p>
-              Siamo pront* a sostenere, co-progettare e condividere percorsi con chi, come noi, ha a cuore il bene comune. Scrivici!
-            </p>
+            <div className="collabora-card">
+              <p className="section-label">Collaborazioni</p>
+              <h2>Sei un&apos;associazione? Collaboriamo!</h2>
+              <p>
+                Il territorio cresce quando le idee si incontrano. Cerchiamo sempre nuove sinergie per arricchire il tessuto sociale di chi ci vive intorno. Riconosciamo il ruolo delle associazioni, degli enti e in generale del volontariato, e per questo vogliamo creare ponti.
+              </p>
+              <p>
+                Siamo pront* a sostenere, co-progettare e condividere percorsi con chi, come noi, ha a cuore il bene comune. Scrivici!
+              </p>
+            </div>
             <a className="collabora-cta" href="mailto:anico.odv@gmail.com?subject=Proposta%20di%20collaborazione">
               Scrivici una mail
             </a>
