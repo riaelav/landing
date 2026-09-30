@@ -20,6 +20,7 @@ const passeggiSlides = [
 const navItems = [
   { label: 'Chi siamo', href: '#chi-siamo' },
   { label: 'I Passeggi', href: '#passeggi' },
+  { label: 'Dona', href: '#dona' },
   { label: 'Unisciti', href: '#unisciti' },
   { label: 'Collabora', href: '#collabora' },
   { label: 'Contatti', href: '#contatti' }
@@ -46,8 +47,20 @@ function App() {
   const [activeSlide, setActiveSlide] = useState(0)
   const [activePasseggi, setActivePasseggi] = useState(0)
   const [showCollaboraBar, setShowCollaboraBar] = useState(false)
+  const [showPrivacy, setShowPrivacy] = useState(false)
   const heroRef = useRef(null)
   const collaboraRef = useRef(null)
+
+  useEffect(() => {
+    if (!showPrivacy) return
+    const onKey = (e) => e.key === 'Escape' && setShowPrivacy(false)
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [showPrivacy])
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -175,6 +188,31 @@ function App() {
           </div>
         </section>
 
+        <section className="section dona" id="dona">
+          <div className="dona-media" aria-hidden="true">
+            <img src="/images/furgone-gruppo.jpg" alt="" />
+          </div>
+          <div className="dona-card">
+            <p className="section-label">Raccolta fondi</p>
+            <h2>Aiutaci a comprare un furgone per prenderci cura di Fano.</h2>
+            <p>
+              Ci serve un furgone. È questo lo scopo della raccolta fondi, e con il tuo aiuto possiamo ottenerlo.
+            </p>
+            <p>
+              A Fano ci prendiamo cura di due beni della comunità: i Passeggi, con mezzo chilometro di alberi nel cuore della città, e l&apos;ex Casetta del Custode, un nuovo spazio in zona aeroporto che gestiamo insieme ad altri. Tosaerba, tagliasiepi, rastrelli e materiali per la manutenzione vanno portati dal nostro magazzino ai due siti, e oggi ci arrangiamo come si può.
+            </p>
+            <p>
+              Con un furgone lo faremmo in modo più comodo e veloce. Niente più attrezzi pesanti portati a mano dai nostri volontari, più tempo per curare il verde.
+            </p>
+            <p>
+              Da oltre un anno, ogni sabato mattina, più di 100 soci under35 si occupano degli spazi comuni di Fano, con una sola regola: nessuno escluso. Puoi aiutarci a farlo meglio anche tu. <strong>Ogni euro che doni vale doppio</strong>, grazie alla Fondazione Cassa di Risparmio di Fano.
+            </p>
+            <a className="dona-cta" href="https://www.retedeldono.it/progetto/transportanico" target="_blank" rel="noreferrer">
+              Dona ora
+            </a>
+          </div>
+        </section>
+
         <section className="section unisciti" id="unisciti">
           <div className="unisciti-media" aria-hidden="true">
             <img src="/images/DSCF3369.JPG" alt="" />
@@ -255,8 +293,81 @@ function App() {
         </div>
         <div className="footer-bottom">
           <p>Anicò ODV — Organizzazione di Volontariato · Fano (PU)</p>
+          <button type="button" className="privacy-link" onClick={() => setShowPrivacy(true)}>
+            Privacy policy
+          </button>
         </div>
       </footer>
+
+      {showPrivacy && (
+        <div className="privacy-overlay" role="dialog" aria-modal="true" aria-labelledby="privacy-title" onClick={() => setShowPrivacy(false)}>
+          <div className="privacy-modal" onClick={(e) => e.stopPropagation()}>
+            <button type="button" className="privacy-close" aria-label="Chiudi" onClick={() => setShowPrivacy(false)}>
+              ×
+            </button>
+            <div className="privacy-content">
+              <h2 id="privacy-title">Informativa sulla privacy</h2>
+              <p className="privacy-updated">Ultimo aggiornamento: 30/09/2026</p>
+              <p>
+                Questa pagina spiega quali dati personali raccogliamo quando ti iscrivi ad Anicò, perché ci servono e cosa ne facciamo. Ti chiediamo pochissimo, e solo quello che serve davvero.
+              </p>
+
+              <h3>Chi tratta i tuoi dati</h3>
+              <p>
+                Il titolare del trattamento è Anicò ODV, in persona del legale rappresentante pro tempore Gianluca Vitali, con sede in Via della Libertà 3, 61032 Fano (PU), codice fiscale e partita IVA 02846370415. Per qualsiasi cosa riguardi i tuoi dati puoi scriverci alla PEC <a href="mailto:anico.odv@pec.it">anico.odv@pec.it</a> oppure all&apos;email <a href="mailto:anico.odv@gmail.com">anico.odv@gmail.com</a>.
+              </p>
+
+              <h3>Quali dati raccogliamo</h3>
+              <p>
+                Tutto passa da un unico punto: il modulo di iscrizione. Quando lo compili ci lasci nome, cognome, data di nascita, codice fiscale, indirizzo email e numero di cellulare. Non raccogliamo nient&apos;altro da questo sito.
+              </p>
+              <p>
+                Se paghi la quota con PayPal, i dati di pagamento li gestisce solo PayPal. A noi arriva la conferma che hai pagato, non i tuoi dati di carta o conto.
+              </p>
+
+              <h3>A cosa ci servono</h3>
+              <p>
+                Li usiamo per tre cose. Per iscriverti e tenere il libro dei soci, come la legge ci chiede. Per attivare l&apos;assicurazione infortuni e responsabilità civile con Reale Mutua, obbligatoria per chi partecipa alle nostre attività da volontario: è per questo che ci servono data di nascita e codice fiscale, senza non possiamo farti la copertura. E per scriverti quando c&apos;è qualcosa di pratico legato alla tessera e alle attività, tipo la convocazione dell&apos;assemblea, le date degli appuntamenti o il rinnovo di settembre. Non mandiamo pubblicità e non passiamo i tuoi contatti a nessuno per scopi commerciali.
+              </p>
+
+              <h3>Su cosa ci basiamo</h3>
+              <p>
+                Trattiamo i tuoi dati perché serve a completare l&apos;iscrizione che ci hai chiesto (art. 6.1.b GDPR) e a rispettare obblighi di legge, come quelli assicurativi e contabili (art. 6.1.c). Non ti chiediamo consensi aggiuntivi; se un domani volessimo usare i dati per qualcos&apos;altro, te lo chiederemmo prima.
+              </p>
+
+              <h3>Chi vede i tuoi dati</h3>
+              <p>
+                Dentro Anicò li vedono solo le persone del direttivo che si occupano delle iscrizioni. Per funzionare ci appoggiamo anche ad alcuni soggetti esterni:
+              </p>
+              <ul>
+                <li>Google, che ci fornisce il modulo e lo spazio dove le risposte arrivano, sulla casella Gmail dell&apos;associazione. Google può trattare dati anche fuori dall&apos;Unione Europea, con le garanzie previste dal GDPR.</li>
+                <li>Reale Mutua Assicurazioni, a cui passiamo nome, cognome, data di nascita e codice fiscale per attivare la tua copertura.</li>
+                <li>PayPal, se scegli di pagare online la quota: gestisce in autonomia i dati di pagamento secondo la propria informativa.</li>
+                <li>Il nostro responsabile della contabilità, che tiene i registri e le ricevute dell&apos;associazione.</li>
+              </ul>
+              <p>Non vendiamo i tuoi dati e non li rendiamo pubblici.</p>
+
+              <h3>Per quanto tempo li teniamo</h3>
+              <p>
+                Teniamo i tuoi dati finché sei socio*a. Quando l&apos;iscrizione finisce conserviamo solo quello che la legge ci obbliga a tenere, cioè ricevute e registri contabili, per 10 anni, poi cancelliamo. Se ci chiedi di eliminarli prima lo facciamo, salvo ciò che siamo tenuti a conservare per legge.
+              </p>
+
+              <h3>I tuoi diritti</h3>
+              <p>
+                Puoi chiederci in ogni momento di vedere i dati che abbiamo su di te, correggerli, cancellarli, limitarne l&apos;uso, riceverli in un formato leggibile o opporti al trattamento. Scrivici alla PEC o all&apos;email dell&apos;associazione e ti rispondiamo entro un mese.
+              </p>
+              <p>
+                Se pensi che non abbiamo trattato bene i tuoi dati puoi rivolgerti al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noreferrer">www.garanteprivacy.it</a>).
+              </p>
+
+              <h3>Modifiche</h3>
+              <p>
+                Se cambiamo qualcosa di importante aggiorniamo la data qui in alto e, se serve, ti avvisiamo via email.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
